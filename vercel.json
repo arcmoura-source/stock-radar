@@ -1,0 +1,23 @@
+{
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/macro-news",
+      "destination": "/api/macro-news"
+    },
+    {
+      "source": "/api/my-portfolio-live",
+      "destination": "/api/my-portfolio-live"
+    },
+    {
+      "source": "/api/stock",
+      "destination": "/api/stock"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
