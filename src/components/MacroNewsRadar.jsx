@@ -121,6 +121,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
   const [lastUpdated, setLastUpdated] = useState('A carregar feeds em tempo real...');
   const [newsList, setNewsList] = useState(NEWS_ITEMS);
   const [isLiveFeedActive, setIsLiveFeedActive] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(15);
 
   // Fetch live breaking news from backend RSS engine on mount and on refresh
   const loadLiveNews = async (forceRefresh = false) => {
@@ -158,16 +159,37 @@ export default function MacroNewsRadar({ holdings = [] }) {
     loadLiveNews(false);
   }, []);
 
+  // Reset pagination when category or search changes
+  useEffect(() => {
+    setVisibleCount(15);
+  }, [selectedFilter, searchQuery]);
+
   // Filtering news
   const filteredNews = useMemo(() => {
     return newsList.filter(item => {
       // Filter by category pill
       if (selectedFilter !== 'ALL') {
-        if (selectedFilter === 'RATES' && item.category !== 'FED & JUROS' && item.category !== 'BCE & EUROPA') return false;
-        if (selectedFilter === 'TECH' && !item.tickers.some(t => ['QDVE', 'GOOGL', 'AMZN', 'META'].includes(t))) return false;
-        if (selectedFilter === 'CHIPS' && !item.tickers.includes('CHIP')) return false;
-        if (selectedFilter === 'BIOTECH' && !item.tickers.includes('2B70')) return false;
-        if (selectedFilter === 'EUROPE' && !item.tickers.includes('DB1')) return false;
+        if (selectedFilter === 'RATES') {
+          if (!['FED & JUROS', 'BCE & EUROPA'].includes(item.category)) return false;
+        } else if (selectedFilter === 'TECH') {
+          const isTechCategory = ['BIG TECH & IA', 'SOFTWARE & CIBERSEGURANÇA', 'PUBLICIDADE & CONSUMO DIGITAL'].includes(item.category);
+          const hasTechTicker = item.tickers.some(t => ['QDVE', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AAPL'].includes(t));
+          if (!isTechCategory && !hasTechTicker) return false;
+        } else if (selectedFilter === 'CHIPS') {
+          if (item.category !== 'SEMICONDUTORES' && !item.tickers.includes('CHIP')) return false;
+        } else if (selectedFilter === 'BIOTECH') {
+          const isBioCategory = ['BIOTECNOLOGIA', 'FUSÕES FARMACÊUTICAS & SAÚDE'].includes(item.category);
+          if (!isBioCategory && !item.tickers.includes('2B70')) return false;
+        } else if (selectedFilter === 'EUROPE') {
+          const isEuroCategory = ['BCE & EUROPA', 'DEUTSCHE BÖRSE & FINANÇAS'].includes(item.category);
+          if (!isEuroCategory && !item.tickers.includes('DB1')) return false;
+        } else if (selectedFilter === 'ENERGY') {
+          if (item.category !== 'ENERGIA & DATA CENTERS IA') return false;
+        } else if (selectedFilter === 'REGULATION') {
+          if (item.category !== 'REGULAÇÃO & GEOPOLÍTICA') return false;
+        } else if (selectedFilter === 'MARKETS') {
+          if (item.category !== 'MERCADOS GERAIS & ÍNDICES') return false;
+        }
       }
 
       // Filter by search query
@@ -182,7 +204,11 @@ export default function MacroNewsRadar({ holdings = [] }) {
 
       return true;
     });
-  }, [selectedFilter, searchQuery]);
+  }, [selectedFilter, searchQuery, newsList]);
+
+  const displayedNews = useMemo(() => {
+    return filteredNews.slice(0, visibleCount);
+  }, [filteredNews, visibleCount]);
 
   const handleRefresh = () => {
     loadLiveNews(true);
@@ -199,14 +225,14 @@ export default function MacroNewsRadar({ holdings = [] }) {
               <Newspaper className="w-4 h-4" />
             </span>
             <h2 className="text-lg font-bold text-zinc-900 tracking-tight font-sans">
-              Radar de Notícias & Inteligência Macro (Fed, BCE e Teus Ativos)
+              Radar de Notícias & Inteligência de Mercado (50+ Feeds em Tempo Real)
             </h2>
             <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#2D6A4F] text-white">
               LIVE
             </span>
           </div>
           <p className="text-xs text-zinc-600 mt-1">
-            Como as decisões de taxas de juro da Fed e do BCE influenciam diretamente o teu QDVE, Big Tech, Chips e a Deutsche Börse.
+            Monitorização contínua de macroeconomia (Fed e BCE), empresas centrais da tua carteira (QDVE, CHIP, 2B70, DB1, META, GOOGL, AMZN), cadeia de fornecimento, energia para IA e regulação global.
           </p>
         </div>
 
@@ -323,7 +349,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
                   : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
               }`}
             >
-              Todas ({NEWS_ITEMS.length})
+              Todas ({newsList.length})
             </button>
             <button
               onClick={() => setSelectedFilter('RATES')}
@@ -333,7 +359,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
                   : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
               }`}
             >
-              🏛️ Fed & BCE (Taxas)
+              🏛️ Macro & Juros (Fed & BCE)
             </button>
             <button
               onClick={() => setSelectedFilter('TECH')}
@@ -343,7 +369,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
                   : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
               }`}
             >
-              🇺🇸 Big Tech (QDVE, META, AMZN, GOOGL)
+              🇺🇸 Big Tech & Cloud (QDVE, META, AMZN, GOOGL)
             </button>
             <button
               onClick={() => setSelectedFilter('CHIPS')}
@@ -353,7 +379,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
                   : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
               }`}
             >
-              ⚡ Semicondutores (CHIP)
+              ⚡ Semicondutores (CHIP, TSMC, ASML, NVDA)
             </button>
             <button
               onClick={() => setSelectedFilter('BIOTECH')}
@@ -363,7 +389,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
                   : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
               }`}
             >
-              🧬 Biotecnologia (2B70)
+              🧬 Biotecnologia & Saúde (2B70, FDA, M&A)
             </button>
             <button
               onClick={() => setSelectedFilter('EUROPE')}
@@ -373,7 +399,37 @@ export default function MacroNewsRadar({ holdings = [] }) {
                   : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
               }`}
             >
-              🇩🇪 Deutsche Börse & Europa
+              🇩🇪 Deutsche Börse & Europa (DB1, XETRA)
+            </button>
+            <button
+              onClick={() => setSelectedFilter('ENERGY')}
+              className={`px-3 py-1.5 rounded-lg border font-medium whitespace-nowrap transition-all ${
+                selectedFilter === 'ENERGY'
+                  ? 'bg-black text-white border-black font-semibold'
+                  : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
+              }`}
+            >
+              🔋 Energia & Data Centers IA
+            </button>
+            <button
+              onClick={() => setSelectedFilter('REGULATION')}
+              className={`px-3 py-1.5 rounded-lg border font-medium whitespace-nowrap transition-all ${
+                selectedFilter === 'REGULATION'
+                  ? 'bg-black text-white border-black font-semibold'
+                  : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
+              }`}
+            >
+              ⚖️ Regulação & Antitrust
+            </button>
+            <button
+              onClick={() => setSelectedFilter('MARKETS')}
+              className={`px-3 py-1.5 rounded-lg border font-medium whitespace-nowrap transition-all ${
+                selectedFilter === 'MARKETS'
+                  ? 'bg-black text-white border-black font-semibold'
+                  : 'bg-white text-zinc-700 border-black/20 hover:bg-[#FAF8F5]'
+              }`}
+            >
+              📈 Mercados Gerais & S&P 500
             </button>
           </div>
 
@@ -408,7 +464,7 @@ export default function MacroNewsRadar({ holdings = [] }) {
             <p className="text-xs text-zinc-600 font-medium">Nenhuma notícia encontrada para este filtro.</p>
           </div>
         ) : (
-          filteredNews.map(item => {
+          displayedNews.map(item => {
             const isExpanded = expandedNewsId === item.id;
             return (
               <div
@@ -508,6 +564,27 @@ export default function MacroNewsRadar({ holdings = [] }) {
               </div>
             );
           })
+        )}
+
+        {/* Load More News / Progressive Disclosure Pagination */}
+        {filteredNews.length > visibleCount && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 border-t border-black/10">
+            <button
+              onClick={() => setVisibleCount(prev => prev + 15)}
+              className="px-6 py-2.5 rounded-xl bg-black text-white text-xs font-semibold hover:bg-zinc-800 transition-all shadow-sm flex items-center gap-2"
+            >
+              <span>Carregar Mais Notícias (+15)</span>
+              <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">
+                A mostrar {displayedNews.length} de {filteredNews.length}
+              </span>
+            </button>
+            <button
+              onClick={() => setVisibleCount(filteredNews.length)}
+              className="px-4 py-2 rounded-xl bg-white border border-black/20 text-zinc-700 text-xs font-medium hover:bg-[#FAF8F5] transition-all"
+            >
+              Mostrar Todas ({filteredNews.length})
+            </button>
+          </div>
         )}
       </div>
 

@@ -36,51 +36,99 @@ MACRO_NEWS_CACHE = {
 NEWS_FEEDS_CONFIG = [
     {
         'category': 'FED & JUROS',
-        'query': 'Federal+Reserve+interest+rates+when:3d',
+        'query': 'Federal+Reserve+OR+Jerome+Powell+OR+inflation+CPI+PCE+OR+Treasury+yields+when:3d',
         'tickers': ['QDVE', 'GOOGL', 'AMZN', 'META', '2B70'],
         'categoryColor': 'bg-blue-100 text-blue-900 border-blue-300',
-        'impactTitle': 'Impacto nas Tuas Ações dos EUA (QDVE, Tech & Biotech):',
-        'impactText': 'Decisões da Fed sobre taxas e inflação impactam o custo de capital e múltiplos de avaliação (P/E) das tuas tecnológicas americanas.'
+        'impactTitle': 'Impacto nas Ações dos EUA & Custo de Capital:',
+        'impactText': 'Decisões da Fed sobre taxas e rendimentos das obrigações do Tesouro definem a taxa de desconto (WACC) e múltiplos de avaliação de todo o setor tecnológico e biotecnológico.'
     },
     {
         'category': 'BCE & EUROPA',
-        'query': 'ECB+interest+rates+OR+Deutsche+Boerse+OR+European+Central+Bank+when:4d',
+        'query': 'ECB+interest+rates+OR+Christine+Lagarde+OR+German+economy+OR+Bunds+when:4d',
         'tickers': ['DB1'],
         'categoryColor': 'bg-amber-100 text-amber-900 border-amber-300',
         'impactTitle': 'Impacto no Teu Pilar Europeu (Deutsche Börse):',
-        'impactText': 'Cortes do BCE direcionam fluxos de liquidez e poupança para a bolsa XETRA e índices STOXX da Deutsche Börse (DB1).'
+        'impactText': 'Cortes do BCE direcionam fluxos de liquidez e poupança bancária para a bolsa XETRA e aumentam as transações de proteção (hedging) na Eurex da Deutsche Börse (DB1).'
     },
     {
         'category': 'BIG TECH & IA',
-        'query': 'Meta+Platforms+OR+Amazon+AWS+OR+Google+Alphabet+AI+when:3d',
+        'query': 'Microsoft+Azure+OR+Amazon+AWS+OR+Google+Cloud+OR+Meta+AI+when:3d',
         'tickers': ['META', 'AMZN', 'GOOGL', 'QDVE'],
         'categoryColor': 'bg-emerald-100 text-emerald-900 border-emerald-300',
-        'impactTitle': 'Impacto na Big Tech (META 5%, AMZN 5%, GOOGL 5%):',
-        'impactText': 'Investimentos de capital (Capex) em centros de dados e novos modelos de IA impulsionam o fluxo de caixa livre futuro.'
+        'impactTitle': 'Impacto na Nuvem e Big Tech (META 6%, AMZN 5%, GOOGL 5%, QDVE 38%):',
+        'impactText': 'A aceleração de receitas na cloud corporativa e a monetização de modelos fundacionais de IA consolidam margens operacionais e crescimento contínuo de fluxo de caixa livre.'
     },
     {
         'category': 'SEMICONDUTORES',
-        'query': 'Nvidia+OR+TSMC+OR+ASML+semiconductor+chips+when:3d',
+        'query': 'Nvidia+OR+TSMC+OR+ASML+OR+Broadcom+OR+AMD+semiconductors+when:3d',
         'tickers': ['CHIP'],
         'categoryColor': 'bg-purple-100 text-purple-900 border-purple-300',
-        'impactTitle': 'Impacto nos Teus 20% em Semicondutores (CHIP):',
-        'impactText': 'Procura global por chips e máquinas litográficas EUV sustenta o maior motor de crescimento composto do teu portfólio.'
+        'impactTitle': 'Impacto nos Teus 14% em Semicondutores (CHIP):',
+        'impactText': 'A corrida mundial por chips de 2nm/3nm e ferramentas litográficas EUV da ASML sustenta o monopólio fabril da TSMC e a liderança de processadores de IA.'
     },
     {
         'category': 'BIOTECNOLOGIA',
-        'query': 'Biotechnology+FDA+OR+Vertex+OR+CRISPR+when:4d',
+        'query': 'Biotechnology+FDA+approval+OR+Vertex+OR+Regeneron+OR+Gilead+OR+CRISPR+when:4d',
         'tickers': ['2B70'],
         'categoryColor': 'bg-rose-100 text-rose-900 border-rose-300',
         'impactTitle': 'Impacto nos Teus 16% em Biotecnologia (2B70):',
-        'impactText': 'Novas aprovações da FDA e fusões farmacêuticas valorizam o cabaz de genómica e saúde descorrelacionado com tech.'
+        'impactText': 'Novas aprovações aceleradas da FDA e avanços em terapias genéticas valorizam o cabaz de biotecnologia inovadora sem correlação com o ciclo de consumo tradicional.'
     },
     {
-        'category': 'INFRAESTRUTURA FINANCEIRA',
-        'query': 'Deutsche+Boerse+OR+Clearstream+OR+Eurex+OR+XETRA+when:7d',
+        'category': 'FUSÕES FARMACÊUTICAS & SAÚDE',
+        'query': 'Pharma+acquisition+buyout+OR+Eli+Lilly+OR+Novo+Nordisk+OR+obesity+GLP1+when:4d',
+        'tickers': ['2B70'],
+        'categoryColor': 'bg-pink-100 text-pink-900 border-pink-300',
+        'impactTitle': 'Impacto em M&A e Farmacêuticas Globais:',
+        'impactText': 'Grandes farmacêuticas com cofres cheios compram biotechs com prémios de 50% a 100% para repor patentes em expiração, impulsionando os componentes do índice 2B70.'
+    },
+    {
+        'category': 'DEUTSCHE BÖRSE & FINANÇAS',
+        'query': 'Deutsche+Boerse+OR+Clearstream+OR+Eurex+OR+XETRA+trading+volume+when:7d',
         'tickers': ['DB1'],
         'categoryColor': 'bg-indigo-100 text-indigo-900 border-indigo-300',
-        'impactTitle': 'Impacto nos Teus 12% em Deutsche Börse (DB1):',
-        'impactText': 'Monopólio de compensação da Clearstream e negociação na Xetra mantêm margens operacionais >50% sem risco de crédito.'
+        'impactTitle': 'Impacto nos Teus 16% em Deutsche Börse (DB1):',
+        'impactText': 'Monopólio de compensação da Clearstream, negociação na Xetra e índices STOXX mantêm margens operacionais acima de 50% sem qualquer risco de crédito bancário.'
+    },
+    {
+        'category': 'ENERGIA & DATA CENTERS IA',
+        'query': 'datacenter+power+OR+nuclear+energy+AI+OR+Amazon+Google+nuclear+when:5d',
+        'tickers': ['AMZN', 'GOOGL', 'QDVE'],
+        'categoryColor': 'bg-teal-100 text-teal-900 border-teal-300',
+        'impactTitle': 'Impacto na Infraestrutura de Energia para IA:',
+        'impactText': 'Amazon, Google e Microsoft estão a fechar acordos diretos de energia nuclear e renovável para alimentar centros de dados de IA sem restrições de rede elétrica.'
+    },
+    {
+        'category': 'REGULAÇÃO & GEOPOLÍTICA',
+        'query': 'Google+antitrust+DOJ+OR+EU+AI+Act+OR+Taiwan+semiconductor+export+when:5d',
+        'tickers': ['GOOGL', 'META', 'CHIP'],
+        'categoryColor': 'bg-orange-100 text-orange-900 border-orange-300',
+        'impactTitle': 'Impacto Regulatório e Geopolítico:',
+        'impactText': 'Acompanhamento de processos antitrust nos EUA/UE e equilíbrio geopolítico no Estreito de Taiwan, vitais para o fornecimento mundial de chips e plataformas digitais.'
+    },
+    {
+        'category': 'PUBLICIDADE & CONSUMO DIGITAL',
+        'query': 'digital+advertising+spending+OR+Meta+Instagram+OR+Google+ad+revenue+when:4d',
+        'tickers': ['META', 'GOOGL', 'AMZN'],
+        'categoryColor': 'bg-cyan-100 text-cyan-900 border-cyan-300',
+        'impactTitle': 'Impacto em Receitas Publicitárias e Comércio Eletrónico:',
+        'impactText': 'A IA preditiva na segmentação de anúncios da Meta e Alphabet aumenta o retorno sobre investimento (ROAS) dos anunciantes, sustentando taxas de faturação recorde.'
+    },
+    {
+        'category': 'SOFTWARE & CIBERSEGURANÇA',
+        'query': 'enterprise+software+spending+OR+Salesforce+OR+ServiceNow+OR+CrowdStrike+when:4d',
+        'tickers': ['QDVE'],
+        'categoryColor': 'bg-slate-100 text-slate-900 border-slate-300',
+        'impactTitle': 'Impacto no S&P 500 Info Tech (QDVE 38%):',
+        'impactText': 'Orçamentos de software corporativo (SaaS) e segurança informática são despesas obrigatórias para empresas mundiais, reforçando o pilar tecnológico central.'
+    },
+    {
+        'category': 'MERCADOS GERAIS & ÍNDICES',
+        'query': 'SP500+earnings+OR+Nasdaq+rally+OR+Wall+Street+stock+market+when:3d',
+        'tickers': ['QDVE', 'CHIP', 'DB1'],
+        'categoryColor': 'bg-zinc-100 text-zinc-900 border-zinc-300',
+        'impactTitle': 'Impacto no Sentimento e Amplitude dos Mercados:',
+        'impactText': 'A saúde dos lucros do S&P 500 e do Nasdaq dita o fluxo de capital institucional para ações de crescimento e ativos de qualidade superior.'
     }
 ]
 
@@ -92,6 +140,7 @@ def fetch_live_macro_news(force=False):
         return MACRO_NEWS_CACHE['data']
 
     items_list = []
+    seen_titles = set()
     item_id = 1
     for f in NEWS_FEEDS_CONFIG:
         url = f"https://news.google.com/rss/search?q={f['query']}&hl=en-US&gl=US&ceid=US:en"
@@ -99,12 +148,19 @@ def fetch_live_macro_news(force=False):
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
             with urllib.request.urlopen(req, timeout=4) as resp:
                 root = ET.fromstring(resp.read())
-                raw_items = root.findall('.//item')[:2]
+                raw_items = root.findall('.//item')[:5]
                 for it in raw_items:
                     raw_title = (it.find('title').text or '').strip()
+                    if not raw_title:
+                        continue
                     parts = raw_title.rsplit(' - ', 1)
                     title = parts[0] if len(parts) > 1 else raw_title
                     source = parts[1] if len(parts) > 1 else 'Mercados Globais'
+                    
+                    norm_key = ''.join(c.lower() for c in title if c.isalnum())[:45]
+                    if norm_key in seen_titles:
+                        continue
+                    seen_titles.add(norm_key)
                     
                     pub_str = it.find('pubDate').text or ''
                     time_label = 'Hoje'
