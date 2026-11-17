@@ -17,6 +17,8 @@
 
 **StockRadar AI** solves the fragmentation of personal wealth management by integrating multi-market asset tracking (European stocks, US Big Tech, thematic UCITS ETFs) with advanced quantitative modeling. It bridges the gap between daily portfolio monitoring and long-term financial independence planning by combining real-time pricing, Trinity Study safe-withdrawal simulation, tax-aware dividend analytics, and real-time AI market intelligence powered by Google Gemini.
 
+> 🔒 **Privacy & Synthetic Benchmark Data Notice:** All portfolio holdings, capital amounts, allocations, and transaction values presented across this application and repository are **100% simulated mock data (synthetic benchmarks)** created specifically for software engineering demonstration, UI testing, and quantitative modeling. No real personal assets or private financial figures are used.
+
 ---
 
 ## 🚀 Key Features
@@ -189,9 +191,10 @@ Or execute `upload-vercel.bat` on Windows for an automated build and deployment 
 
 ---
 
-## ⚖️ Disclaimer
+## ⚖️ Disclaimer & Synthetic Data Disclosure
 
-*StockRadar AI is an educational, quantitative modeling, and portfolio-tracking tool created for personal portfolio demonstration and software engineering showcasing. None of the projections, calculations, or AI outputs constitute professional financial or tax advice.*
+* **Synthetic / Mock Portfolio:** All portfolio assets, purchase prices, deposit amounts, cash values, and performance statistics shown in this repository and the live demonstration environment are **entirely simulated sample data** used exclusively for software development, architectural testing, and mathematical modeling. They do not represent real personal investments, private accounts, or actual capital.
+* **Educational Purpose:** *StockRadar AI is an educational, quantitative modeling, and portfolio-tracking tool created for technical showcasing and software engineering demonstration. None of the projections, calculations, or AI outputs constitute professional financial or tax advice.*
 
 ---
 
