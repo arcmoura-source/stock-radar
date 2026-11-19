@@ -150,9 +150,9 @@ export default function App() {
             <div className="w-4 h-4 rounded bg-black text-white flex items-center justify-center font-bold text-[9px]">
               SR
             </div>
-            <span className="font-semibold text-zinc-900">StockRadar AI • Finteck AI</span>
+            <span className="font-semibold text-zinc-900">Stock Radar AI</span>
             <span className="text-zinc-400">•</span>
-            <span className="text-zinc-600 text-[11px]">Multi-Market Financial Intelligence (US, Europe, Portugal, Brazil)</span>
+            <span className="text-zinc-600 text-[11px]">Financial Intelligence & Asset Management</span>
           </div>
 
           <div className="flex items-center gap-3 text-zinc-500 font-mono text-[11px]">

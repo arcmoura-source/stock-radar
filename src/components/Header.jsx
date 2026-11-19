@@ -14,14 +14,14 @@ export default function Header({ activeTab, setActiveTab }) {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-sm tracking-tight text-zinc-900 font-sans">
-                  StockRadar
+                <span className="font-bold text-sm sm:text-base tracking-tight text-zinc-900 font-sans">
+                  Stock Radar
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-black text-white">
                   AI
                 </span>
               </div>
-              <p className="text-[10px] sm:text-[11px] text-zinc-500 hidden xs:block sm:block font-sans">
+              <p className="text-[10px] sm:text-[11px] text-zinc-500 font-sans leading-tight">
                 Financial Intelligence & Asset Management
               </p>
             </div>
