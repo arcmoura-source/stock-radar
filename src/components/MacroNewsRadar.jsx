@@ -499,14 +499,30 @@ export default function MacroNewsRadar({ holdings = [] }) {
                 </div>
 
                 {/* News Title */}
-                <h3 className="font-bold text-sm sm:text-base text-zinc-900 leading-snug">
+                <h3 className="font-bold text-sm sm:text-base text-zinc-900 leading-snug font-sans">
                   {item.title}
                 </h3>
 
-                {/* Summary */}
-                <p className="text-xs text-zinc-700 leading-relaxed">
-                  {item.summary}
-                </p>
+                {/* Clear Financial Summary */}
+                <div className="bg-white/80 p-3 rounded-xl border border-black/10 text-xs text-zinc-800 leading-relaxed font-sans">
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 mb-1 flex items-center gap-1">
+                    <span>📰 Resumo da Notícia</span>
+                  </div>
+                  <p>{item.summary}</p>
+                </div>
+
+                {/* HIGHLIGHTED PORTFOLIO IMPACT BOX (DIRECTLY ANSWERS USER'S NEED) */}
+                <div className="bg-[#EAF3ED] p-3.5 rounded-xl border border-[#2D6A4F]/25 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#2D6A4F] animate-pulse"></span>
+                    <span className="text-xs font-bold text-[#1B4332]">
+                      🎯 O que impacta na tua carteira ({item.tickers.join(', ')}):
+                    </span>
+                  </div>
+                  <p className="text-xs text-zinc-800 leading-relaxed font-sans">
+                    {item.impactText}
+                  </p>
+                </div>
 
                 {item.link && (
                   <div className="pt-0.5">
@@ -514,26 +530,13 @@ export default function MacroNewsRadar({ holdings = [] }) {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-zinc-800 hover:text-black underline underline-offset-2 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-zinc-700 hover:text-black underline underline-offset-2 transition-colors"
                     >
-                      <span>Ler notícia original na {item.source}</span>
-                      <ExternalLink className="w-3 h-3 text-zinc-500" />
+                      <span>Ler notícia original completa na {item.source}</span>
+                      <ExternalLink className="w-3 h-3 text-zinc-400" />
                     </a>
                   </div>
                 )}
-
-                {/* HIGHLIGHTED PORTFOLIO IMPACT BOX (DIRECTLY ANSWERS USER'S NEED) */}
-                <div className="bg-white p-3.5 rounded-xl border border-black/20 space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#2D6A4F] animate-pulse"></span>
-                    <span className="text-xs font-bold text-zinc-900">
-                      {item.impactTitle}
-                    </span>
-                  </div>
-                  <p className="text-xs text-zinc-700 leading-relaxed font-sans">
-                    {item.impactText}
-                  </p>
-                </div>
 
                 {/* Expandable Key Points */}
                 <div>

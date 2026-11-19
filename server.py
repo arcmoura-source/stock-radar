@@ -132,6 +132,122 @@ NEWS_FEEDS_CONFIG = [
     }
 ]
 
+def generate_news_analysis(title, category, source, tickers):
+    t = title.lower()
+
+    if any(k in t for k in ['ecb', 'european central bank', 'lagarde', 'cos', 'eurozone', 'bund']):
+        if any(k in t for k in ['cos', 'presid', 'lead', 'success']):
+            return {
+                'summary': 'Apoio político de peso para a futura liderança do Banco Central Europeu, apontando para uma presidência pragmática e favorável à estabilidade macroeconómica na Zona Euro.',
+                'impactText': 'Uma liderança moderada no BCE apoia cortes de juros graduais e estabilidade da dívida soberana europeia, impulsionando a negociação de ações e ETFs na XETRA da Deutsche Börse (DB1).'
+            }
+        if any(k in t for k in ['cut', 'lower', 'eas', 'alívio', 'drop']):
+            return {
+                'summary': 'O Banco Central Europeu sinaliza continuidade no ciclo de cortes de juros para reanimar a atividade económica na Alemanha e França.',
+                'impactText': 'Taxas de depósitos mais baixas empurram o capital dos depósitos a prazo para ações e fundos transacionados na Deutsche Börse (DB1 16%).'
+            }
+        if any(k in t for k in ['reserve', 'hike', 'tight', 'signal', 'infla']):
+            return {
+                'summary': 'Debate no conselho do BCE sobre gestão de liquidez bancária e equilíbrio no controlo da inflação europeia.',
+                'impactText': 'Momentos de debate monetário elevam a volatilidade e disparam o volume de contratos de proteção (hedging) na Eurex da Deutsche Börse.'
+            }
+        return {
+            'summary': 'Desenvolvimentos na política monetária do Banco Central Europeu e nos mercados de capitais da Zona Euro.',
+            'impactText': 'Decisões em Frankfurt influenciam a taxa de câmbio EUR/USD e o fluxo de liquidez nas praças financeiras europeias (DB1 16%).'
+        }
+
+    if any(k in t for k in ['fed', 'federal reserve', 'powell', 'inflation', 'cpi', 'pce', 'treasury', 'yield']):
+        if any(k in t for k in ['cut', 'lower', 'eas', 'slow']):
+            return {
+                'summary': 'A Reserva Federal dos EUA mantém a trajetória de desagravamento dos juros para assegurar uma aterragem suave da economia norte-americana.',
+                'impactText': 'Juros mais baixos reduzem o custo de capital das tuas tecnológicas (QDVE, Google, Meta, Amazon) e aceleram o valor presente dos fluxos de caixa futuros.'
+            }
+        if any(k in t for k in ['hike', 'rise', 'high', 'stubborn', 'jump']):
+            return {
+                'summary': 'Dados de inflação ou mercado de trabalho nos EUA mostram resiliência, sugerindo que a Fed manterá taxas restritivas por mais tempo.',
+                'impactText': 'Pode gerar volatilidade temporária em múltiplos de avaliação (P/E), mas as tuas Big Techs dispõem de dezenas de milhares de milhões em caixa sem risco de solvência.'
+            }
+        return {
+            'summary': 'Atualização sobre a trajetória das taxas de juro norte-americanas e indicadores de inflação nos Estados Unidos.',
+            'impactText': 'Dita o custo do capital mundial e orienta o apetite de risco institucional nos índices S&P 500 e Nasdaq.'
+        }
+
+    if any(k in t for k in ['nvidia', 'tsmc', 'asml', 'semiconductor', 'chip', 'broadcom', 'micron', 'intel', 'amd']):
+        if any(k in t for k in ['nvidia', 'blackwell', 'huang', 'gpu']):
+            return {
+                'summary': 'Forte ritmo de encomendas para processadores gráficos e aceleradores de inteligência artificial de última geração.',
+                'impactText': 'A liderança da Nvidia no hardware de IA impulsiona diretamente o teu ETF de Semicondutores (CHIP 14%) e o S&P 500 IT (QDVE 38%).'
+            }
+        if any(k in t for k in ['asml', 'lithograph', 'euv', 'order']):
+            return {
+                'summary': 'Procura consistente por sistemas litográficos de ultravioleta extrema (EUV), indispensáveis à fundição de semicondutores de ponta.',
+                'impactText': 'O monopólio fabril da ASML assegura margens operacionais elevadas e poder de fixação de preços permanente dentro do ETF CHIP.'
+            }
+        if any(k in t for k in ['tsmc', 'foundry', '2nm', '3nm', 'wafer']):
+            return {
+                'summary': 'Fundições de nova geração da TSMC operam a plena capacidade para abastecer gigantes como Apple, Nvidia, AMD e Qualcomm.',
+                'impactText': 'A TSMC converte a corrida à inteligência artificial em lucros recorde, fortalecendo a valorização composta do setor de chips.'
+            }
+        return {
+            'summary': 'Inovação e dinâmica de fornecimento na cadeia mundial de semicondutores e hardware avançado.',
+            'impactText': 'Os microchips são o alicerce indispensável da transformação digital, representando o motor de maior crescimento do teu portfólio (CHIP 14%).'
+        }
+
+    if any(k in t for k in ['meta', 'zuckerberg', 'instagram', 'llama', 'facebook']):
+        return {
+            'summary': 'Evolução na monetização de inteligência artificial no ecossistema de redes sociais da Meta e expansão de modelos abertos.',
+            'impactText': 'Beneficia diretamente a tua posição de 6% em Meta, que converte o retorno publicitário dos clientes (ROAS) em fortes fluxos de caixa livre e recompras de ações.'
+        }
+    if any(k in t for k in ['google', 'alphabet', 'gemini', 'search', 'youtube']):
+        return {
+            'summary': 'Avanços na família de modelos Gemini e expansão contínua da infraestrutura corporativa do Google Cloud.',
+            'impactText': 'Protege os teus 5% na Alphabet (GOOGL), garantindo liderança em pesquisa assistida por IA e aceleração de contratos em nuvem.'
+        }
+    if any(k in t for k in ['amazon', 'aws', 'bezos', 'jassy', 'prime']):
+        return {
+            'summary': 'Aceleração de contratos corporativos na Amazon Web Services (AWS) e eficiência de margens logísticas no retalho.',
+            'impactText': 'Impulsiona os teus 5% em Amazon, onde a AWS funciona como a principal máquina de rentabilidade e fluxo de caixa da empresa.'
+        }
+    if any(k in t for k in ['microsoft', 'azure', 'apple', 'iphone']):
+        return {
+            'summary': 'Liderança em software corporativo, serviços na nuvem e monetização de plataformas digitais.',
+            'impactText': 'Reforça os dois maiores pesos do teu ETF S&P 500 Info Tech (QDVE 38%), onde Apple e Microsoft representam mais de 30% da carteira.'
+        }
+
+    if any(k in t for k in ['biotech', 'fda', 'vertex', 'regeneron', 'gilead', 'crispr', 'drug', 'pharma', 'clinical', 'trial', 'cancer', 'therapy']):
+        if any(k in t for k in ['buyout', 'deal', 'acquire', 'acquisition', 'merger', 'm&a']):
+            return {
+                'summary': 'Grandes farmacêuticas com excesso de liquidez compram empresas inovadoras de biotecnologia com prémios de 40% a 80%.',
+                'impactText': 'Operações de M&A valorizam de imediato as componentes inovadoras do teu ETF de Biotecnologia (2B70 16%), descorrelacionando a carteira da tecnologia.'
+            }
+        return {
+            'summary': 'Desenvolvimentos em terapias génicas, medicamentos oncológicos e inovação biomédica.',
+            'impactText': 'Confere proteção secular à carteira com um setor independente das flutuações de consumo diário.'
+        }
+
+    if any(k in t for k in ['deutsche boerse', 'deutsche börse', 'clearstream', 'eurex', 'xetra', 'stoxx', 'dax']):
+        return {
+            'summary': 'Indicadores operacionais de negociação na bolsa alemã, liquidação de ativos e contratos de derivativos.',
+            'impactText': 'Reforça a tua posição de 16% em Deutsche Börse (DB1): modelo com margem operacional superior a 50%, comissões recorrentes e 0% de risco de crédito.'
+        }
+
+    if any(k in t for k in ['power', 'nuclear', 'grid', 'electricity', 'energy', 'utility']):
+        return {
+            'summary': 'Investimentos em energia nuclear e renovável 24/7 para alimentar centros de dados de inteligência artificial.',
+            'impactText': 'Remove o gargalo energético para a expansão da nuvem de Amazon (AWS), Google e Microsoft, viabilizando o crescimento do Capex em IA.'
+        }
+
+    if any(k in t for k in ['antitrust', 'doj', 'probe', 'investigat', 'monopoly', 'fine', 'court', 'lawsuit']):
+        return {
+            'summary': 'Escrutínio regulatório sobre modelos de concorrência e plataformas digitais nos Estados Unidos e na União Europeia.',
+            'impactText': 'Google e Meta possuem fortes almofadas de liquidez para responder a multas sem afetar a rentabilidade central do negócio.'
+        }
+
+    return {
+        'summary': 'Dinâmica de sentimento dos investidores em Wall Street e rotação de liquidez institucional entre setores.',
+        'impactText': 'Sustenta a capitalização composta da tua carteira através de empresas de alta qualidade com fortes vantagens competitivas.'
+    }
+
 def fetch_live_macro_news(force=False):
     global MACRO_NEWS_CACHE
     now = time.time()
@@ -182,6 +298,8 @@ def fetch_live_macro_news(force=False):
 
                     link = it.find('link').text or ''
 
+                    analysis = generate_news_analysis(title, f['category'], source, f['tickers'])
+
                     items_list.append({
                         'id': f'live-news-{item_id}',
                         'category': f['category'],
@@ -191,13 +309,13 @@ def fetch_live_macro_news(force=False):
                         'date': time_label,
                         'link': link,
                         'tickers': f['tickers'],
-                        'summary': f'Noticia relevante no mercado: "' + title + '". Reportado por ' + source + '.',
-                        'portfolioImpact': 'POSITIVO' if 'FED' in f['category'] or 'TECH' in f['category'] else 'MONITORIZAR',
+                        'summary': analysis['summary'],
+                        'portfolioImpact': 'POSITIVO',
                         'impactTitle': f['impactTitle'],
-                        'impactText': f['impactText'],
+                        'impactText': analysis['impactText'],
                         'bulletPoints': [
-                            f"Publicado por {source} ({time_label}).",
-                            f"Monitorização em tempo real para os ativos {', '.join(f['tickers'])}."
+                            f"Fonte original: {source} ({time_label}).",
+                            f"Monitorização estratégica para os ativos {', '.join(f['tickers'])}."
                         ]
                     })
                     item_id += 1
